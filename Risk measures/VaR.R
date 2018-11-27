@@ -1,4 +1,4 @@
-# install.packages("R6)
+# install.packages("R6")
 # install.packages("rstudioapi")
 
 ## Load VaR functions
