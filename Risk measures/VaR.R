@@ -2,12 +2,23 @@
 # install.packages("rstudioapi")
 
 ## Load VaR functions
-pathstring <- rstudioapi::getSourceEditorContext()$path
-newPathstring <- substr(pathstring, 1, nchar(pathstring) - 5)
-files <- list.files(newPathstring)
-files <- files[files != "VaR.R"]
-files <- files[substr(files, 1, 3) == "VaR"]
-invisible(sapply(files, source))
+
+if (sys.nframe() == 0L){
+  pathstring <- rstudioapi::getSourceEditorContext()$path
+  newPathstring <- substr(pathstring, 1, nchar(pathstring) - 5)
+  files <- list.files(newPathstring)
+  files <- files[files != "VaR.R"]
+  files <- files[substr(files, 1, 3) == "VaR"]
+  paths <- sapply(files, function(x) paste(newPathstring, x, sep = ""))
+  invisible(sapply(paths, source))
+} else {
+  newPathstring <- getwd()
+  files <- list.files(newPathstring)
+  files <- files[files != "VaR.R"]
+  files <- files[substr(files, 1, 3) == "VaR"]
+  invisible(sapply(files, source))
+}
+
 
 ## Master VaR class
 VaR <- R6::R6Class("VaR",list(
