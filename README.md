@@ -1,2 +1,2 @@
-# ActuarialST
-Actuarial Survival Toolbox
+# ActuarialSST
+Actuarial Sciences Survival Toolbox
