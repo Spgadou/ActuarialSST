@@ -1,21 +1,23 @@
-#################################
-## Call option pricing example ##
-#################################
+########################
+## Density derivation ##
+########################
+##
+## Goal: Find the shape of density of ST,
+##       given its dynamics
 ##
 ## Author: Simon-Pierre Gadoury
 ## Date: 11-29-2018
 
-# Stock dynamics: dS = aS dt + b sqrt(S) dW
+# Asset dynamics: dS = aS dt + b sqrt(S) dW
 # a: constant
 # b: constant
 # (W): Brownian motion
 
-r <- 0.05 # Risk-free rate (constant)
 a <- 0.05; b <- sqrt(0.15)
 S0 <- 100; Mat <- 5
 
-# Sub-goal (1): Find the caracteristic function of ST given S0
-# -> Use Feynman-Kac to find the caracteristic function's ODEs.
+# Sub-goal (1): Find the characteristic function of ST given S0
+# -> Use Feynman-Kac to find the characteristic function's ODEs.
 # -> Solve the ODEs numerically with "deSolve".
 
 f <- function(u){
@@ -43,10 +45,10 @@ CF <- Vectorize(function(u){
 }, 'u')
 
 # Sub-goal (2): Derive the density function from the CF
-# -> We already coded such a function (use it)
+# -> We already coded such a function.
 
 dirname <- "/Examples"
-filename <- "/CallOptionPricing_Feynman.R"
+filename <- "/DensityDerivation_Feynman.R"
 pathstring <- rstudioapi::getSourceEditorContext()$path
 newPathstring <- substr(pathstring, 1, nchar(pathstring) - nchar(filename))
 newPathstring <- substr(newPathstring, 1, nchar(newPathstring) - nchar(dirname))
